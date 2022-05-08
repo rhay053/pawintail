@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="UTF-8">
+    <title>우리집 멍냥이 작성폼</title>
+</head>
+	<!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+<style>
+	h5 {text-align:center;}
+	
+    .layout {
+        width : 500px;
+        margin : 0 auto;
+        margin-top : 40px;
+    }
+
+    .layout input {
+        width : 100%;
+        box-sizing : border-box
+    }
+
+    .layout textarea {
+        width : 100%;
+        margin-top : 10px;
+        min-height : 300px;
+    }
+
+</style>
+</th:block>
+
+<th:block layout:fragment="content">
+<body>
+	<h5> 우리집 멍냥이를 소개해주세요🐶🐱 </h5>
+    <div class="layout">
+		<!--th:object 추가하고 name 대신 th:field 입력 -->
+		  <form action="/mypet/writepro" th:object="${mypet}" method="post" enctype="multipart/form-data">
+            작성자
+            <input type="text" th:field="*{writer}" placeholder="퍼인테일에서 사용하는 닉네임을 적어주세요.">            
+            <input type="hidden" th:field="*{id}">
+            <br>제목
+            <input th:field="*{title}" type="text" placeholder="제목을 입력하세요.">
+            <br>내용
+            <textarea th:field="*{content}" placeholder="내용을 입력하세요."></textarea>
+            <input type="file" name="file">
+		  <br><br>
+		  <button type="submit" class="btn btn-dark">작성완료</button>
+		</form>
+    </div>
+</body>
+</th:block>
+</html>

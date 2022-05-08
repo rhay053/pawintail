@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+        $(document).ready(function(){
+            $("#searchBtn").on("click",function(e) {
+                e.preventDefault();
+                page(0);
+            });
+        });
+
+        function page(page){
+            var searchDateType = $("#searchDateType").val();
+            var searchSellStatus = $("#searchSellStatus").val();
+            var searchBy = $("#searchBy").val();
+            var searchQuery = $("#searchQuery").val();
+
+            location.href="/admin/items/" + page + "?searchDateType=" + searchDateType
+            + "&searchSellStatus=" + searchSellStatus
+            + "&searchBy=" + searchBy
+            + "&searchQuery=" + searchQuery;
+        }
+
+    </script>
+</th:block>
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+        select{
+            margin-right:10px;
+        }
+        .form-control {
+        	width: 150;
+        }
+    </style>
+</th:block>
+
+<div layout:fragment="content">
+<div class="container">
+<!-- events.number에서 에러 발생 -->
+    <form th:action="@{'/admin/events/' + ${events.number}}" role="form" method="get" th:object="${events}">
+        <table class="table">
+            <thead>
+            <tr>
+                <td>이벤트아이디</td>
+                <td>이벤트명</td>
+                <td>등록자</td>
+                <td>등록일</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="event, status: ${events.getContent()}">
+                <td th:text="${event.eventId}"></td>
+                <td>
+                    <a th:href="'/admin/event/'+${event.eventId}" th:text="${event.eventName}"></a>
+                </td>
+                <td th:text="${event.createdBy}"></td>
+                <td th:text="${event.regTime}"></td>
+            </tr>
+            </tbody>
+        </table>
+		
+		<!-- 이벤트 페이징 -->
+<!--  <h3>아이템수: [[${events.number}]]</h3>
+		<h3>페이지수: [[${events.totalPages}]]</h3>
+		<br>
+		
+     <div th:with="start=${(events.number/maxPage)*maxPage + 1}, end=(${(events.totalPages == 0) ? 1 : (start + (maxPage - 1) < events.totalPages ? start + (maxPage - 1) : events.totalPages)})" >
+            <ul class="pagination justify-content-center">
+
+                <li class="page-item" th:classappend="${events.first}?'disabled'">
+                    <a th:onclick="'javascript:page(' + ${events.number - 1} + ')'" aria-label='Previous' class="page-link">
+                        <span aria-hidden='true'>Previous</span>
+                    </a>
+                </li>
+
+                <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${events.number eq page-1}?'active':''">
+                    <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
+                </li>
+
+                <li class="page-item" th:classappend="${events.last}?'disabled'">
+                    <a th:onclick="'javascript:page(' + ${events.number + 1} + ')'" aria-label='Next' class="page-link">
+                        <span aria-hidden='true'>Next</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>-->
+
+    </form>
+</div>
+</div>
+
+</html>

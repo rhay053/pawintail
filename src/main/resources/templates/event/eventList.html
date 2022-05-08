@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<title>진행 중인 이벤트 모아보기!</title>
+<th:block layout:fragment="css">
+    <style>
+        select{
+            margin-right:10px;
+        }
+    </style>
+</th:block>
+<th:block layout:fragment="content">
+<div class="container">
+	<div class="row">
+	<!-- events는 EventMainDto(controller에 events로 만듦) Dto안에 들어있는 배열?인덱스? 하나가 event임, event안에 id, eventName, eventImgUrl 들어있음-->
+        <th:block th:each="event, status: ${events.getContent()}">
+            <div class="col-md-4 margin">
+                <div class="card">
+                    <a th:href="'/event/' +${event.eventId}" class="text-dark">
+                        <img th:src="${event.imgUrl}" class="card-img-top" th:alt="${event.eventName}" height="400" width="600">
+                        <!-- <div class="card-body" >
+                            <h4 class="card-title" display="none">[[${event.eventName}]]</h4>
+                        </div> -->
+                    </a>
+                </div>
+            </div>
+        </th:block>
+    </div>
+   <br><br>
+<!-- MainItemDto 페이징 -->
+    
+</div>	
+</th:block>
+</html>

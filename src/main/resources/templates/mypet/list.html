@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="UTF-8">
+    <title>우리집 멍냥이 리스트 페이지</title>
+</head>
+<!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+<style>
+	h5 {text-align:center;}
+
+	.pagesearch {text-align:center;}
+	
+    .layout {
+        width : 80%;
+        margin : 0 auto;
+        margin-top : 40px;
+    }
+
+</style>
+</th:block>
+<th:block layout:fragment="content">
+<body>
+	<h5> 우리집 멍냥이를 소개합니다🐶🐱 </h5>
+    <div class="layout">
+    <button type="button" class="btn btn-dark btn-lg" style="float:right;"><a th:href="@{/mypet/write}" style="text-decoration:none; color:white;">글쓰기</a></button>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>글번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="mypet : ${list}">
+                    <td th:text="${mypet.id}">1</td>
+                    <td>
+                        <a th:text="${mypet.title}" th:href="@{/mypet/view(id=${mypet.id})}"></a>
+                    </td>
+                    <td th:text="${mypet.writer}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 페이징 및 검색처리 -->
+		<div class="pagesearch">
+        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${page != nowPage}" th:href="@{/mypet/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
+            <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+        </th:block>
+        <form th:action="@{/mypet/list}" method="get">
+            <input type="text" name="searchKeyword">
+            <button type="submit" class="btn btn-light">검색</button>
+        </form>
+        </div>
+    </div>
+</body>
+</th:block>
+</html>

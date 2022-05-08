@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="UTF-8">
+    <title>우리집 멍냥이 수정폼</title>
+</head>
+<!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+<style>
+	h5 {text-align:center;}
+	
+    .layout {
+        width : 500px;
+        margin : 0 auto;
+        margin-top : 40px;
+    }
+
+    .layout input {
+        width : 100%;
+        box-sizing : border-box
+    }
+
+    .layout textarea {
+        width : 100%;
+        margin-top : 10px;
+        min-height : 300px;
+    }
+</style>
+</th:block>
+
+<th:block layout:fragment="content">
+<body>
+<h5> 우리집 멍냥이를 소개해주세요🐶🐱 </h5>
+<div class="layout">
+    <form th:action="@{/mypet/update/{id}(id = ${mypet.id})}" th:object="${mypet}" method="post" enctype="multipart/form-data">
+        <input name="id" type="hidden" th:field="*{id}">
+        <input name="title" th:field="*{title}" type="text" >
+        <textarea name="content" th:field="*{content}"></textarea>
+        <input type="file" name="file">
+        <br><br>
+        <button type="submit" class="btn btn-dark">수정완료</button>
+    </form>
+</div>
+</body>
+</th:block>
+</html>

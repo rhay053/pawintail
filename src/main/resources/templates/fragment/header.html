@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment ="header">
+
+<nav class="py-2 bg-light border-bottom">
+    <div class="container d-flex flex-wrap">
+      <ul class="nav me-auto">
+        <li class="nav-item"><a href="/home" class="nav-link link-dark px-2 active" aria-current="page"><i class="bi bi-house"></i></a></li>
+        <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="bi bi-headset" ></i> 고객센터</a></li>
+        <li class="nav-item"><a href="#" class="nav-link link-dark px-2"><i class="bi bi-megaphone" ></i> 공지사항</a></li> 
+        <li class="nav-item"><a href="/cart" class="nav-link link-dark px-2" sec:authorize="isAuthenticated()"><i class="bi bi-basket" width="16" height="16" ></i> 장바구니</a></li>
+      </ul>
+      
+      <ul class="nav">
+     	<li class="nav-item"><a href="/admin/item/new" class="nav-link px-2 link-dark" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품등록</a></li>
+		<li class="nav-item"><a href="/admin/items" class="nav-link px-2 link-dark" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">상품관리</a></li>
+		<li class="nav-item"><a href="/admin/event/new" class="nav-link px-2 link-dark" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">이벤트등록</a></li>
+		<li class="nav-item"><a href="/admin/events" class="nav-link px-2 link-dark" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">이벤트관리</a></li>
+      	<li class="nav-item"><a href="/mypage" class="nav-link link-dark px-2" sec:authorize="isAuthenticated()"><i class="bi bi-person" ></i> 마이페이지</a></li>
+      	<li class="nav-item"><a href="/orders" class="nav-link link-dark px-2" sec:authorize="isAuthenticated()"><i class="bi bi-person" ></i> 구매이력</a></li>
+        <li class="nav-item"><a href="/members/login" class="nav-link link-dark px-2" sec:authorize="isAnonymous()">로그인</a></li>
+        <li class="nav-item"><a href="/members/logout" class="nav-link link-dark px-2" sec:authorize="isAuthenticated()">로그아웃</a></li>
+        <li class="nav-item"><a href="/members/new" class="nav-link link-dark px-2" sec:authorize="isAnonymous()">회원가입</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <br>
+<div class="container">
+   <a href="/home"><img th:src="@{/assets/img/logo.png}" width="310" height="65"></a>
+	<header class="p-3 mb-3 border-bottom">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+	       <li>
+	         <!-- <div class="dropdown">
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+			  <a href="#" class="nav-link px-2 link-dark">카테고리</a>
+			  </button>
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+			    <li><a class="dropdown-item" href="#">강아지사료</a></li>
+			    <li><a class="dropdown-item" href="#">강아지간식</a></li>
+			    <li><a class="dropdown-item" href="#">고양이사료</a></li>
+			    <li><a class="dropdown-item" href="#">고양이간식</a></li>
+			  </ul>
+			</div> -->
+			</li>
+		  <li><a href="/item/itemList" class="nav-link px-2 link-dark">전체상품</a></li>          
+          <li><a href="/event/eventList" class="nav-link px-2 link-dark">이벤트</a></li>
+          <li><a href="/donation" class="nav-link px-2 link-dark">후원하기</a></li>
+          <li><a href="/mypet/list" class="nav-link px-2 link-dark">우리집 멍냥이 자랑</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-3 ">
+          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
+		<button type="submit"><i class="bi bi-search"></i></button>
+      	</div>
+   	 </div>
+	
+
+</div>
+
+</html>
