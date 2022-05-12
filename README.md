@@ -24,5 +24,5 @@
 <br>
 
 ## 3. ERD 설계
-![Uploading ERD pawintail.png…]()
+<img src="![Uploading ERD pawintail.png…]()" width="500" height="400"/>
 <br>
