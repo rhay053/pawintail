@@ -24,5 +24,10 @@
 <br>
 
 ## 3. ERD 설계
-<img src="![Uploading ERD pawintail.png…]()" width="500" height="400"/>
+<img width="806" alt="ERD pawintail" src="https://user-images.githubusercontent.com/95905063/167971067-826e02bf-d1d1-4ae5-860b-210fcc2a7a9b.png">
 <br>
+
+
+## 4. 핵심기술
+
+## 5. 핵심 
