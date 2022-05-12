@@ -24,5 +24,5 @@
 <br>
 
 ## 3. ERD 설계
-https://github.com/rhay053/pawintail/issues/1#issue-1233311995
+![Uploading ERD pawintail.png…]()
 <br>
